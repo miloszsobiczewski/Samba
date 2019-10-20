@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from .models import Budget
+from .models import Budget, Category
 from .serializers import BudgetSerializer, CategorySerializer
 
 
@@ -10,5 +10,5 @@ class BudgetViewSet(viewsets.ModelViewSet):
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Budget.objects.all().order_by()
+    queryset = Category.objects.all().order_by()
     serializer_class = CategorySerializer
