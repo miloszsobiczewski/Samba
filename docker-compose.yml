@@ -2,8 +2,7 @@ version: "3"
 
 services:
   samba:
-    build:
-      dockerfile: "Dockerfile"
+    build: .
     volumes:
       - ./Samba:/user/src/app
     ports:
