@@ -4,7 +4,7 @@ services:
   samba:
     build: .
     volumes:
-      - ./Samba:/user/src/app
+      - .:/app
     ports:
       - "8000:8000"
     command: >
