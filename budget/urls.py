@@ -3,8 +3,8 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register(r'category', views.CategoryViewSet)
-router.register(r'inspector', views.BudgetViewSet)
+router.register(r'categories', views.CategoryViewSet)
+router.register(r'entries', views.BudgetViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
