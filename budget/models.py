@@ -1,4 +1,4 @@
-import uuid
+import datetime
 from django.db import models
 
 
@@ -12,8 +12,8 @@ class Category(models.Model):
 
 
 class Budget(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    amount = models.DecimalField(max_digits=4, decimal_places=2)
-    date = models.DateField()
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    id = models.AutoField(primary_key=True)
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
+    date = models.DateField(default=datetime.date.today)
+    category = models.ForeignKey(Category, related_name="category", on_delete=models.PROTECT)
     note = models.TextField(default=None, blank=True)

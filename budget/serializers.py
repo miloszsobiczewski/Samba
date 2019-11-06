@@ -3,13 +3,17 @@ from .models import Budget, Category
 
 
 class BudgetSerializer(serializers.HyperlinkedModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all()
+    )
+
     class Meta:
         model = Budget
-        fields = "__all__"
+        fields = ("id", "amount", "date", "category", "note")
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ("id", "name", "icon", "sign")
 
