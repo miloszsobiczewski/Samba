@@ -13,4 +13,5 @@ class ActualisationAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class ActualisationAdmin(admin.ModelAdmin):
     model = Category
+    ordering = ["name"]
     list_display = ["name", "icon", "sign"]
