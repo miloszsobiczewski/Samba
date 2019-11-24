@@ -4,8 +4,8 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    icon = models.CharField(max_length=10)
-    sign = models.IntegerField()
+    icon = models.CharField(max_length=10, default="i")
+    sign = models.IntegerField(default=-1)
 
     def __str__(self):
         return self.name

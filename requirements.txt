@@ -1,2 +1,4 @@
 Django==2.2.4
 djangorestframework==3.10.3
+pysmb==1.1.27
+
