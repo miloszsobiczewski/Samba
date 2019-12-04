@@ -17,3 +17,10 @@ class Budget(models.Model):
     date = models.DateField(default=datetime.date.today)
     category = models.ForeignKey(Category, related_name="category", on_delete=models.PROTECT)
     note = models.TextField(default=None, blank=True)
+
+
+class BudgetSummary(Budget):
+    class Meta:
+        proxy = True
+        verbose_name = "Budget Summary"
+        verbose_name_plural = "Budget Summaries"
