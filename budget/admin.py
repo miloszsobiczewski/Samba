@@ -6,6 +6,7 @@ from .models import Budget, Category, BudgetSummary
 
 @admin.register(Budget)
 class ActualisationAdmin(admin.ModelAdmin):
+    search_fields = ["category__name", "date"]
     model = Budget
     ordering = ["-date"]
     list_display = ["date", "amount", "note", "category"]
