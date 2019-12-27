@@ -27,7 +27,7 @@ def download(request, id):
             category_obj, _ = Category.objects.get_or_create(name=category)
             Budget.objects.create(
                 amount=instance["amount"],
-                date=datetime.datetime.strptime(instance["date"], '%d.%m.%Y'),
+                date=datetime.datetime.strptime(instance["date"], "%d.%m.%Y"),
                 note=instance["note"],
                 category=category_obj,
             )

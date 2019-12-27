@@ -5,9 +5,8 @@ from tempfile import NamedTemporaryFile
 from smb.SMBConnection import SMBConnection
 
 
-class SambaSynchro():
-
-    def __init__(self, config,  **kwargs):
+class SambaSynchro:
+    def __init__(self, config, **kwargs):
         super().__init__(**kwargs)
         self.smb_path = config["smb_path"]
         self.device_path = os.path.join(os.getcwd(), config["device_path"])
@@ -20,19 +19,23 @@ class SambaSynchro():
         self.share_name = config["share_name"]
 
     def connect(self):
-        self.server = SMBConnection(self.username,
-                                    self.password, self.client, '',
-                                    use_ntlm_v2=True,
-                                    is_direct_tcp=True)
+        self.server = SMBConnection(
+            self.username,
+            self.password,
+            self.client,
+            "",
+            use_ntlm_v2=True,
+            is_direct_tcp=True,
+        )
         isok = self.server.connect(self.ip, 139)
         if isok:
-            print('isok')
+            print("isok")
         else:
-            print('not ok')
+            print("not ok")
 
     def is_connected(self):
         try:
-            requests.get('http://' + self.ip, timeout=1)
+            requests.get("http://" + self.ip, timeout=1)
             return True
         except requests.ConnectionError as err:
             return False
@@ -42,7 +45,7 @@ class SambaSynchro():
         files = self.server.listPath(self.share_name, self.smb_path)
         filenames = [f.filename for f in files]
         self.server.close()
-        filenames = [f for f in filenames if (len(f) == 10 and f[2] == '_')]
+        filenames = [f for f in filenames if (len(f) == 10 and f[2] == "_")]
         filenames.sort()
         return filenames
 
@@ -53,7 +56,7 @@ class SambaSynchro():
         # k=0 -> download all, k>0 -> download k files.
         if self.is_connected():
             files = self.listFiles()
-            if k>0:
+            if k > 0:
                 files = files[-k:]
             if isinstance(names, type(None)):
                 names = files
@@ -64,15 +67,20 @@ class SambaSynchro():
                 if smb_file_name in names:
                     with NamedTemporaryFile() as tmp:
                         fname = os.path.join(self.smb_path, smb_file_name)
-                        _, filesize = self.server.retrieveFile(self.share_name, fname, tmp)
+                        _, filesize = self.server.retrieveFile(
+                            self.share_name, fname, tmp
+                        )
                         tmp.file.seek(0)
                         smb_file_content = tmp.file.read().decode()
-                        with open(self.target_path(smb_file_name), 'w') as f:
+                        with open(self.target_path(smb_file_name), "w") as f:
                             f.write(smb_file_content)
-                            n = sum([ 1 for i in smb_file_content if i == "{"])
+                            n = sum([1 for i in smb_file_content if i == "{"])
                             nrows.append(n)
                         dwn.append(smb_file_name)
             self.server.close()
-            self.txt_dwn = 'Data \n%s\n successfully downloaded (items number: \n%s)' % (dwn, nrows)
+            self.txt_dwn = (
+                "Data \n%s\n successfully downloaded (items number: \n%s)"
+                % (dwn, nrows)
+            )
         else:
-            self.txt_dwn = 'Connection error :('
+            self.txt_dwn = "Connection error :("

@@ -18,7 +18,7 @@ from django.conf.urls import url, include
 
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    url(r'^inspectorbudget/', include('budget.urls')),
-    url(r'^features/', include('features.urls')),
+    url("admin/", admin.site.urls),
+    url(r"^inspectorbudget/", include("budget.urls")),
+    url(r"^features/", include("features.urls")),
 ]
