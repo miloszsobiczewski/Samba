@@ -8,27 +8,41 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, unique=True)),
-                ('icon', models.CharField(max_length=10)),
-                ('sign', models.IntegerField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50, unique=True)),
+                ("icon", models.CharField(max_length=10)),
+                ("sign", models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='Budget',
+            name="Budget",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=8)),
-                ('date', models.DateField(auto_now_add=True)),
-                ('note', models.TextField(blank=True, default=None)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='category', to='budget.Category')),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=8)),
+                ("date", models.DateField(auto_now_add=True)),
+                ("note", models.TextField(blank=True, default=None)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="category",
+                        to="budget.Category",
+                    ),
+                ),
             ],
         ),
     ]

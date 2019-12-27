@@ -6,18 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budget', '0003_auto_20191124_1108'),
+        ("budget", "0003_auto_20191124_1108"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='icon',
-            field=models.CharField(default='i', max_length=10),
+            model_name="category",
+            name="icon",
+            field=models.CharField(default="i", max_length=10),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='sign',
-            field=models.IntegerField(default=-1),
+            model_name="category", name="sign", field=models.IntegerField(default=-1),
         ),
     ]

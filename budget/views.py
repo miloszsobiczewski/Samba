@@ -11,9 +11,9 @@ class BudgetViewSet(viewsets.ModelViewSet):
         """
         Use filtering by year and month or specific date
         """
-        year = self.request.query_params.get('year', None)
-        month = self.request.query_params.get('month', None)
-        date = self.request.query_params.get('date', None)
+        year = self.request.query_params.get("year", None)
+        month = self.request.query_params.get("month", None)
+        date = self.request.query_params.get("date", None)
 
         if year and month:
             return Budget.objects.filter(date__year=year, date__month=month)
