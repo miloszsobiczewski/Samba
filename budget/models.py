@@ -80,10 +80,13 @@ class Tower(models.Model):
         return self.task
 
     def days_last(self):
-        diff = f"{self.end_date - self.start_date}".split(",")
-        if len(diff) == 1:
-            return "1 day"
-        return diff[0]
+        if self.end_date and self.start_date:
+            diff = f"{self.end_date - self.start_date}".split(",")
+            if len(diff) == 1:
+                return "1 day"
+            return diff[0]
+        else:
+            return "N/A"
 
     @property
     def color(self):
