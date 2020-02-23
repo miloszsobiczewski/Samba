@@ -70,7 +70,7 @@ make_finished.short_description = "Mark selected tasks as finished"
 @admin.register(Tower)
 class TowerAdmin(admin.ModelAdmin):
     model = Tower
-    ordering = ["added_date"]
+    ordering = ["-added_date", "-id"]
     list_display = [
         "id",
         "level",
@@ -83,7 +83,19 @@ class TowerAdmin(admin.ModelAdmin):
         "status",
         "percent",
     ]
+    change_list_template = "admin/tower_change_list.html"
     actions = [make_finished, make_hold, make_in_progress, make_planned, make_set]
+
+    def changelist_view(self, request, extra_context=None):
+        response = super().changelist_view(request, extra_context=extra_context)
+        try:
+            qs = response.context_data["cl"].queryset
+        except (AttributeError, KeyError):
+            return response
+        metrics = {"total": Sum("real_amount")}
+        total = "{:0,.2f}".format(float(qs.aggregate(**metrics)["total"]))
+        response.context_data["summary"] = {"total": total}
+        return response
 
     def percent(self, obj):
         per = obj.percentage
