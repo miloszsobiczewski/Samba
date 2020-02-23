@@ -29,6 +29,9 @@ class BudgetSummary(Budget):
 
 
 class Tower(models.Model):
+    class Meta:
+        verbose_name_plural = "Tower"
+
     LEVEL = [
         ("dzialka", "dzialka"),
         ("formalnosci", "formalnosci"),
