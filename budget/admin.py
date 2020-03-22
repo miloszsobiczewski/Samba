@@ -126,6 +126,7 @@ class QuarterTotalAdmin(admin.ModelAdmin):
         "amount_usd",
         "amount_safe",
         "date_added",
+        "note",
     ]
 
     def total_amount(self, obj):
