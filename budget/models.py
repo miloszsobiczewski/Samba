@@ -114,3 +114,6 @@ class QuarterTotal(models.Model):
     amount_mewash = models.DecimalField(max_digits=8, decimal_places=2)
     date_added = models.DateField(auto_now_add=True)
     note = models.TextField(default=None, blank=True)
+
+    def __str__(self):
+        return f"{self.year}/{self.quarter}"
