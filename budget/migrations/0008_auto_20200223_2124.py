@@ -5,12 +5,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("budget", "0007_auto_20200113_2018"),
-    ]
+    dependencies = [("budget", "0007_auto_20200113_2018")]
 
     operations = [
         migrations.AlterModelOptions(
-            name="tower", options={"verbose_name_plural": "Tower"},
-        ),
+            name="tower", options={"verbose_name_plural": "Tower"}
+        )
     ]

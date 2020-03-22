@@ -102,3 +102,15 @@ class Tower(models.Model):
             "on hold": "blue",
         }
         return colors[self.status]
+
+
+class QuarterTotal(models.Model):
+    year = models.PositiveIntegerField()
+    quarter = models.PositiveIntegerField()
+    amount_gbp = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    amount_usd = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    amount_safe = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    amount_kejt = models.DecimalField(max_digits=8, decimal_places=2)
+    amount_mewash = models.DecimalField(max_digits=8, decimal_places=2)
+    date_added = models.DateField(auto_now_add=True)
+    note = models.TextField(default=None, blank=True)

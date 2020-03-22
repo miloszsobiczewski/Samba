@@ -7,9 +7,7 @@ from django.utils.timezone import utc
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("budget", "0001_initial"),
-    ]
+    dependencies = [("budget", "0001_initial")]
 
     operations = [
         migrations.AlterField(
@@ -18,5 +16,5 @@ class Migration(migrations.Migration):
             field=models.DateField(
                 default=datetime.datetime(2019, 11, 6, 19, 38, 4, 905475, tzinfo=utc)
             ),
-        ),
+        )
     ]

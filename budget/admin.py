@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import Count, Sum
 from django.utils.safestring import mark_safe
 
-from .models import Budget, Category, BudgetSummary, Tower
+from .models import Budget, Category, BudgetSummary, Tower, QuarterTotal
 
 
 @admin.register(Budget)
@@ -110,3 +110,23 @@ class TowerAdmin(admin.ModelAdmin):
             left % ((100 - per) * 2, (100 - per) * 2),
         ]
         return mark_safe("".join(colors))
+
+
+@admin.register(QuarterTotal)
+class QuarterTotalAdmin(admin.ModelAdmin):
+    model = QuarterTotal
+    ordering = ["-date_added"]
+    list_display = [
+        "year",
+        "quarter",
+        "total_amount",
+        "amount_kejt",
+        "amount_mewash",
+        "amount_gbp",
+        "amount_usd",
+        "amount_safe",
+        "date_added",
+    ]
+
+    def total_amount(self, obj):
+        return obj.amount_kejt + obj.amount_mewash

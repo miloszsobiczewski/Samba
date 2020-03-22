@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("budget", "0005_budgetsummary_tower"),
-    ]
+    dependencies = [("budget", "0005_budgetsummary_tower")]
 
     operations = [
         migrations.AddField(
@@ -30,5 +28,5 @@ class Migration(migrations.Migration):
                 default=1,
             ),
             preserve_default=False,
-        ),
+        )
     ]

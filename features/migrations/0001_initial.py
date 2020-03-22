@@ -27,5 +27,5 @@ class Migration(migrations.Migration):
                 ("user", models.CharField(max_length=16)),
                 ("password", models.CharField(max_length=16)),
             ],
-        ),
+        )
     ]

@@ -6,9 +6,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("budget", "0004_auto_20191124_1217"),
-    ]
+    dependencies = [("budget", "0004_auto_20191124_1217")]
 
     operations = [
         migrations.CreateModel(
