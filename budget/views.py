@@ -1,5 +1,4 @@
-from rest_framework import viewsets, generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
 
 from .models import Budget, Category
 from .serializers import BudgetSerializer, CategorySerializer
@@ -7,7 +6,6 @@ from .serializers import BudgetSerializer, CategorySerializer
 
 class BudgetViewSet(viewsets.ModelViewSet):
     serializer_class = BudgetSerializer
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         """
