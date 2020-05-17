@@ -114,3 +114,7 @@ class QuarterTotal(models.Model):
     amount_mewash = models.DecimalField(max_digits=8, decimal_places=2)
     date_added = models.DateField(auto_now_add=True)
     note = models.TextField(default=None, blank=True)
+
+    @property
+    def total_amount(self):
+        return self.amount_kejt + self.amount_mewash + self.amount_safe
