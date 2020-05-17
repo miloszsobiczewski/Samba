@@ -117,3 +117,6 @@ class QuarterTotal(models.Model):
 
     def __str__(self):
         return f"{self.year}/{self.quarter}"
+    @property
+    def total_amount(self):
+        return self.amount_kejt + self.amount_mewash + self.amount_safe

@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics
+from rest_framework import viewsets
 
 from .models import Budget, Category
 from .serializers import BudgetSerializer, CategorySerializer

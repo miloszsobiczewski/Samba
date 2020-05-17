@@ -128,6 +128,3 @@ class QuarterTotalAdmin(admin.ModelAdmin):
         "date_added",
         "note",
     ]
-
-    def total_amount(self, obj):
-        return obj.amount_kejt + obj.amount_mewash + obj.amount_safe
