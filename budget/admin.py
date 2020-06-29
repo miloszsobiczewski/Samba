@@ -141,8 +141,6 @@ class QuarterTotalAdmin(admin.ModelAdmin):
 @admin.register(QuarterTotalSummary)
 class QuarterTotalSummaryAdmin(admin.ModelAdmin):
     change_list_template = "admin/quarter_total_summary_change_list.html"
-    # date_hierarchy = "date_added"
-    list_filter = ("year",)
 
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(request, extra_context=extra_context)
@@ -160,19 +158,20 @@ class QuarterTotalSummaryAdmin(admin.ModelAdmin):
 
         # chart
         summary_over_time = (
-            # qs.annotate(period=Trunc("date_added", "day", output_field=DateTimeField()))
             qs.annotate(period=F("date_added"))
-            # qs.annotate(period=DateField(F("year"), F("quarter"), F("quarter")))
-            .values("period")
+            .values("period", "year", "quarter")
             .annotate(total=F("amount_kejt") + F("amount_mewash") + F("amount_safe"))
             .order_by("period")
         )
         summary_range = summary_over_time.aggregate(low=Min("total"), high=Max("total"))
         high = summary_range.get("high", 0)
-        low = summary_range.get("low", 0)
+        # low = summary_range.get("low", 0)
+        low = 0
         response.context_data["summary_over_time"] = [
             {
                 "period": x["period"],
+                "year": x["year"],
+                "quarter": x["quarter"],
                 "total": x["total"] or 0,
                 "pct": ((x["total"] or 0) - low) / (high - low) * 100
                 if high > low

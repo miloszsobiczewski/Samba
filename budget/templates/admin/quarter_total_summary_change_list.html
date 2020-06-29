@@ -42,9 +42,12 @@
     </tbody>
     
   </table>
-<p></p>
+    <p></p>
 
     <h2> Totals over time </h2>
+
+    <p></p>
+
     <style>
     .bar-chart {
       display: flex;
@@ -91,7 +94,7 @@
             <div class="bar" style="height:{{x.pct}}%">
                 <div class="bar-tooltip">
                     {{x.total | default:0 }}<br>
-                    {{x.quarter | date:"d/m/Y"}}
+                    {{x.year }} | {{ x.quarter}}
                 </div>
             </div>
         {% endfor %}
