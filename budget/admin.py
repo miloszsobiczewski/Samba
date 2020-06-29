@@ -1,8 +1,16 @@
 from django.contrib import admin
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, F, DateTimeField, Min, Max, DateField
+from django.db.models.functions import Trunc
 from django.utils.safestring import mark_safe
 
-from .models import Budget, Category, BudgetSummary, Tower, QuarterTotal
+from .models import (
+    Budget,
+    Category,
+    BudgetSummary,
+    Tower,
+    QuarterTotal,
+    QuarterTotalSummary,
+)
 
 
 @admin.register(Budget)
@@ -128,3 +136,49 @@ class QuarterTotalAdmin(admin.ModelAdmin):
         "date_added",
         "note",
     ]
+
+
+@admin.register(QuarterTotalSummary)
+class QuarterTotalSummaryAdmin(admin.ModelAdmin):
+    change_list_template = "admin/quarter_total_summary_change_list.html"
+    # date_hierarchy = "date_added"
+    list_filter = ("year",)
+
+    def changelist_view(self, request, extra_context=None):
+        response = super().changelist_view(request, extra_context=extra_context)
+        try:
+            qs = response.context_data["cl"].queryset
+        except (AttributeError, KeyError):
+            return response
+
+        # table
+        response.context_data["summary"] = list(
+            qs.values("year", "quarter").annotate(
+                total_amount=F("amount_kejt") + F("amount_mewash") + F("amount_safe")
+            )
+        )
+
+        # chart
+        summary_over_time = (
+            # qs.annotate(period=Trunc("date_added", "day", output_field=DateTimeField()))
+            qs.annotate(period=F("date_added"))
+            # qs.annotate(period=DateField(F("year"), F("quarter"), F("quarter")))
+            .values("period")
+            .annotate(total=F("amount_kejt") + F("amount_mewash") + F("amount_safe"))
+            .order_by("period")
+        )
+        summary_range = summary_over_time.aggregate(low=Min("total"), high=Max("total"))
+        high = summary_range.get("high", 0)
+        low = summary_range.get("low", 0)
+        response.context_data["summary_over_time"] = [
+            {
+                "period": x["period"],
+                "total": x["total"] or 0,
+                "pct": ((x["total"] or 0) - low) / (high - low) * 100
+                if high > low
+                else 0,
+            }
+            for x in summary_over_time
+        ]
+
+        return response

@@ -5,28 +5,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budget', '0009_quartertotal'),
-    ]
+    dependencies = [("budget", "0009_quartertotal")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='quartertotal',
-            name='amount_pln',
-        ),
+        migrations.RemoveField(model_name="quartertotal", name="amount_pln"),
         migrations.AlterField(
-            model_name='quartertotal',
-            name='amount_gbp',
+            model_name="quartertotal",
+            name="amount_gbp",
             field=models.DecimalField(decimal_places=2, default=0, max_digits=8),
         ),
         migrations.AlterField(
-            model_name='quartertotal',
-            name='amount_safe',
+            model_name="quartertotal",
+            name="amount_safe",
             field=models.DecimalField(decimal_places=2, default=0, max_digits=8),
         ),
         migrations.AlterField(
-            model_name='quartertotal',
-            name='amount_usd',
+            model_name="quartertotal",
+            name="amount_usd",
             field=models.DecimalField(decimal_places=2, default=0, max_digits=8),
         ),
     ]

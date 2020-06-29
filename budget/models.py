@@ -7,6 +7,9 @@ class Category(models.Model):
     icon = models.CharField(max_length=10, default="i")
     sign = models.IntegerField(default=-1)
 
+    class Meta:
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return self.name
 
@@ -24,8 +27,8 @@ class Budget(models.Model):
 class BudgetSummary(Budget):
     class Meta:
         proxy = True
-        verbose_name = "Budget Summary"
-        verbose_name_plural = "Budget Summaries"
+        verbose_name = "Budgets Summary"
+        verbose_name_plural = "Budgets Summaries"
 
 
 class Tower(models.Model):
@@ -115,8 +118,20 @@ class QuarterTotal(models.Model):
     date_added = models.DateField(auto_now_add=True)
     note = models.TextField(default=None, blank=True)
 
+    class Meta:
+        verbose_name = "Quarter Total"
+        verbose_name_plural = "Quarter Totals"
+
     def __str__(self):
         return f"{self.year}/{self.quarter}"
+
     @property
     def total_amount(self):
         return self.amount_kejt + self.amount_mewash + self.amount_safe
+
+
+class QuarterTotalSummary(QuarterTotal):
+    class Meta:
+        proxy = True
+        verbose_name = "Quarter Total Summary"
+        verbose_name_plural = "Quarter Totals Summaries"
