@@ -85,14 +85,23 @@ class TowerAdmin(admin.ModelAdmin):
         "task",
         "added_date",
         "days_last",
-        "plan_amount_material",
-        "plan_amount_work",
-        "real_amount",
+        "plan_material_cost",
+        "plan_work_cost",
+        "real_cost",
         "status",
         "percent",
     ]
     change_list_template = "admin/tower_change_list.html"
     actions = [make_finished, make_hold, make_in_progress, make_planned, make_set]
+
+    def plan_material_cost(self, obj):
+        return obj.plan_amount_material
+
+    def plan_work_cost(self, obj):
+        return obj.plan_amount_work
+
+    def real_cost(self, obj):
+        return obj.real_amount
 
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(request, extra_context=extra_context)
