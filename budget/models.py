@@ -1,4 +1,5 @@
 import datetime
+
 from django.db import models
 
 
@@ -15,11 +16,30 @@ class Category(models.Model):
 
 
 class Budget(models.Model):
+    # car = "car"
+    # kids = "kids"
+    # other_outcome = "other_outcome"
+    # car = "car"
+    #
+    # hepterakt = "hepterakt"
+    # kasia = "car"
+    # other_income = "other_income"
+    #
+    # LEVEL = [
+    #     ("dzialka", "dzialka"),
+    #     ("formalnosci", "formalnosci"),
+    #     ("stan0", "stan 0 - fundament"),
+    #     ("stan1", "stan surowy otwarty"),
+    #     ("stan2", "stan surowy zamknięty"),
+    #     ("stan3", "wykonczenie"),
+    #     ("stan4", "zakonczenie budowy"),
+    # ]
+
     id = models.AutoField(primary_key=True)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     date = models.DateField(default=datetime.date.today)
     category = models.ForeignKey(
-        Category, related_name="category", on_delete=models.PROTECT
+        Category, related_name="budgets", on_delete=models.PROTECT
     )
     note = models.TextField(default=None, blank=True)
 

@@ -1,12 +1,13 @@
-import json
 import datetime
+import json
 from pathlib import Path
 
 from django.http import HttpResponseRedirect
 
+from budget.models import Budget, Category
 from features.downloaders.samba import SambaSynchro
+
 from .models import Connection
-from budget.models import Category, Budget
 
 
 def download(request, id):

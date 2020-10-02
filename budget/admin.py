@@ -1,16 +1,10 @@
 from django.contrib import admin
-from django.db.models import Count, Sum, F, DateTimeField, Min, Max, DateField
+from django.db.models import Count, DateField, DateTimeField, F, Max, Min, Sum
 from django.db.models.functions import Trunc
 from django.utils.safestring import mark_safe
 
-from .models import (
-    Budget,
-    Category,
-    BudgetSummary,
-    Tower,
-    QuarterTotal,
-    QuarterTotalSummary,
-)
+from .models import (Budget, BudgetSummary, Category, QuarterTotal,
+                     QuarterTotalSummary, Tower)
 
 
 @admin.register(Budget)

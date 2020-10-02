@@ -1,10 +1,17 @@
 from django.urls import include, path
 from rest_framework import routers
+
 from . import views
 
 router = routers.DefaultRouter()
 router.register(r"categories", views.CategoryViewSet)
+router.register(
+    r"category-summary", views.CategorySummaryViewSet, basename="category-summary"
+)
+router.register(r"year-summary", views.YearSummaryViewSet, basename="year-summary")
+router.register(r"total-summary", views.TotalSummaryViewSet, basename="total-summary")
 router.register(r"entries", views.BudgetViewSet, basename="budget")
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -1,7 +1,7 @@
 import os
-import requests
 from tempfile import NamedTemporaryFile
 
+import requests
 from smb.SMBConnection import SMBConnection
 
 
